@@ -3,6 +3,7 @@ const net = require('net');
 const util = require('util');
 const config = require("../config.json");
 const GameClient = require('../game/gameclient');
+const chalk = require('chalk');
 
 class GameServer {
     constructor() {
@@ -60,8 +61,12 @@ class GameServer {
 
         packet.header = header;
 
+        var color = chalk.yellow
+        if(Pixel.getPacketHandler().hasHandler(header))
+            color = chalk.green
+
         if(config.logPackets && !config.ignoredIncomingPackets.indexOf(header) > -1)
-            console.log("CLIENT => " + packet.header + " -> " + packet.debugBody());
+            console.log(color("CLIENT => " + packet.header + " -> " + packet.debugBody()));
 
         if(Pixel.getPacketHandler().hasHandler(header)) {
             Pixel.getPacketHandler().executeHandler(packet, socket.gameclient);

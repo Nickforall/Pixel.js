@@ -1,4 +1,5 @@
 const ServerMessage = require('../../networking/servermessage');
+const Handshake = require("../composers/handshake");
 
 function releaseEventHandler(message, client) {
     console.log("Client with release " + message.readString() + " connected on the client type " + message.readString())
@@ -8,12 +9,7 @@ function releaseEventHandler(message, client) {
 
 function machineIdEvent(message, client) {
     message.readString(); // don't do anything with the first string
-
-    let composer = 1488;
-    let packet = new ServerMessage(composer);
-    packet.writeString(message.readString()); // send machine id back
-
-    client.sendPacket(packet)
+    client.sendPacket(new Handshake.MachineIdComposer(message.readString()));
 }
 
 function authTicketEvent(message, client) {
