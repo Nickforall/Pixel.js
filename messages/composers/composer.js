@@ -1,4 +1,4 @@
-const ServerMessage = require("../../networking/servermessage");
+const ServerMessage = require('../../networking/servermessage');
 
 class Composer {
     compose() {

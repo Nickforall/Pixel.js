@@ -1,10 +1,12 @@
 const PacketHandler = require('./messages/packethandler');
 const GameServer = require('./networking/gameserver');
+const Database = require('./database/database');
 
 class Pixel {
     constructor() {
         this.packageHandler = new PacketHandler();
         this.gameServer = new GameServer();
+        this.database = new Database();
 
         this.gameServer.listen(30002);
     }
@@ -14,7 +16,11 @@ class Pixel {
     }
 
     getGameServer() {
-        return this.gameServer
+        return this.gameServer;
+    }
+
+    getDatabase() {
+        return this.database;
     }
 }
 

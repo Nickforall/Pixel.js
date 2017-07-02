@@ -45,14 +45,14 @@ class ServerMessage {
 
     debugBody() {
         // make a somewhat readable output text
-        var bufferText = this.buffer.toString('utf8');
-        var outputText = "";
+        const bufferText = this.buffer.toString('utf8');
+        let outputText = '';
 
-        for (var i = 0; i < bufferText.length; i++) {
-            if(bufferText.charCodeAt(i) <= 0x1f) {
-                outputText += "[" + bufferText.charCodeAt(i) + "]"
+        for (let i = 0; i < bufferText.length; i++) {
+            if (bufferText.charCodeAt(i) <= 0x1f) {
+                outputText += `[${bufferText.charCodeAt(i)}]`;
             } else {
-                outputText += bufferText[i]
+                outputText += bufferText[i];
             }
         }
 

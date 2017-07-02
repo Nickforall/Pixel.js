@@ -1,7 +1,6 @@
 const ClientMessage = require('./clientmessage');
 const net = require('net');
-const util = require('util');
-const config = require("../config.json");
+const config = require('../config.json');
 const GameClient = require('../game/gameclient');
 const chalk = require('chalk');
 
@@ -24,9 +23,9 @@ class GameServer {
         buffer = new ClientMessage(buffer);
 
         // check if the client expects crossdomain shit
-        const isXml = String.fromCharCode(buffer.readByte()) === "<";
-        if(isXml) {
-            console.log("Sending crossdomain policy")
+        const isXml = String.fromCharCode(buffer.readByte()) === '<';
+        if (isXml) {
+            console.log('Sending crossdomain policy');
             socket.write('<?xml version="1.0"?>\r\n' +
                 '<!DOCTYPE cross-domain-policy SYSTEM "/xml/dtds/cross-domain-policy.dtd">\r\n' +
                 '<cross-domain-policy>\r\n' +
@@ -51,24 +50,24 @@ class GameServer {
         this.tcp.listen({
             port: port,
             backlog: 10,
-            exclusive: false
+            exclusive: false,
         }, () => console.log('Currently listening socket server on port ::%s', port));
     }
 
     handlePacket(packet, socket) {
-        const length = packet.readInt();
+        packet.readInt();
         const header = packet.readShort();
 
         packet.header = header;
 
-        var color = chalk.yellow
-        if(Pixel.getPacketHandler().hasHandler(header))
-            color = chalk.green
+        let color = chalk.yellow;
+        if (Pixel.getPacketHandler().hasHandler(header)) color = chalk.green;
 
-        if(config.logPackets && !config.ignoredIncomingPackets.indexOf(header) > -1)
-            console.log(color("CLIENT => " + packet.header + " -> " + packet.debugBody()));
+        if (config.logPackets && !config.ignoredIncomingPackets.indexOf(header) > -1) {
+            console.log(color(`CLIENT => ${packet.header} -> ${packet.debugBody()}`));
+        }
 
-        if(Pixel.getPacketHandler().hasHandler(header)) {
+        if (Pixel.getPacketHandler().hasHandler(header)) {
             Pixel.getPacketHandler().executeHandler(packet, socket.gameclient);
         }
     }

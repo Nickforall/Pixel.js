@@ -1,4 +1,11 @@
 {
     "logPackets": true,
-    "ignoredIncomingPackets": []
+    "ignoredIncomingPackets": [],
+    "mysql": {
+        "host": "",
+        "port": 3306,
+        "user": "",
+        "pass": "",
+        "db": ""
+    }
 }

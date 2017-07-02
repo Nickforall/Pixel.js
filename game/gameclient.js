@@ -1,5 +1,5 @@
-const ServerMessage = require("../networking/servermessage");
-const Composer = require("../messages/composers/composer");
+const ServerMessage = require('../networking/servermessage');
+const Composer = require('../messages/composers/composer');
 const chalk = require('chalk');
 
 class GameClient {
@@ -9,28 +9,32 @@ class GameClient {
     }
 
     set machineId(id) {
-        this._machineId = machineId;
+        this._machineId = id;
+    }
+
+    disconnect() {
+        this._socket.end();
+        this._socket.destroy();
     }
 
     sendPacket(packet) {
-        if(packet instanceof Composer) {
+        if (packet instanceof Composer) {
             // make sure errors don't influence the whole process, only the socket causing it
             try {
                 packet = packet.compose();
-            } catch(error) {
+            } catch (error) {
                 console.error(error);
-                this._socket.end();
-                this._socket.destroy();
+                this.disconnect();
                 return;
             }
         }
 
-        if(!packet instanceof ServerMessage) {
+        if (!(packet instanceof ServerMessage)) {
             throw new Error("Provided packet isn't a valid packet.");
         }
 
         this._socket.write(packet.buffer);
-        console.log(chalk.blue("SERVER => " + packet.header + " -> " + packet.debugBody()))
+        console.log(chalk.blue(`SERVER => ${packet.header} -> ${packet.debugBody()}`));
     }
 }
 

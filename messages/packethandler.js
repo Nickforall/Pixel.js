@@ -9,13 +9,13 @@ class PacketHandler {
     }
 
     getPacket(header) {
-        if(this.packets[header]) return this.packets[header];
+        if (this.packets[header]) return this.packets[header];
 
         return null;
     }
 
     hasHandler(header) {
-        return this.packets[header] !== undefined
+        return this.packets[header] !== undefined;
     }
 
     addHandler(header, handler) {
@@ -23,7 +23,7 @@ class PacketHandler {
     }
 
     executeHandler(message, client) {
-        if(!this.hasHandler(message.header)) return;
+        if (!this.hasHandler(message.header)) return;
         this.packets[message.header].call({}, message, client);
     }
 

@@ -1,3 +1,3 @@
 module.exports = {
-    MachineIdComposer: 1488
-}
+    MachineIdComposer: 1488,
+};

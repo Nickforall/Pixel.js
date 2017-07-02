@@ -1,0 +1,22 @@
+{
+    "env": {
+        "node": true
+    },
+    "rules": {
+        "no-underscore-dangle": "off",
+        "indent": ["error", 4],
+        "no-plusplus": "off",
+        "no-param-reassign": "off",
+        "no-console": "off",
+        "object-shorthand": "off",
+        "comma-dangle": ["error", {
+            "objects": "always",
+            "functions": "never"
+        }],
+        "class-methods-use-this": "off"
+    },
+    "globals": {
+        "Pixel": true
+    },
+    "extends": "airbnb-base"
+}

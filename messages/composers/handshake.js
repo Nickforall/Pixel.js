@@ -1,5 +1,5 @@
-const Composer = require("./composer");
-const Outgoing = require("../outgoing");
+const Composer = require('./composer');
+const Outgoing = require('../outgoing');
 const ServerMessage = require('../../networking/servermessage');
 
 class MachineIdComposer extends Composer {
@@ -9,8 +9,8 @@ class MachineIdComposer extends Composer {
     }
 
     compose() {
-        let message = new ServerMessage(Outgoing.MachineIdComposer);
-        message.writeString(this.machineIda);
+        const message = new ServerMessage(Outgoing.MachineIdComposer);
+        message.writeString(this.machineId);
 
         return message;
     }

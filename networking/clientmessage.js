@@ -59,7 +59,7 @@ class ClientMessage {
      * @return {Buffer}      new buffer with the read bytes
      */
     read(size) {
-        const buffer = this.source.slice(this._offset, this._offset + size)
+        const buffer = this.source.slice(this._offset, this._offset + size);
         this._offset += size;
         return buffer;
     }
@@ -102,19 +102,19 @@ class ClientMessage {
      * @return {boolean} boolean from serverMessage
      */
     readBoolean() {
-        return this.readByte() == 1;
+        return this.readByte() === 1;
     }
 
     debugBody() {
         // make a somewhat readable output text
-        var bufferText = this.source.slice(6).toString('utf8');
-        var outputText = "";
+        const bufferText = this.source.slice(6).toString('utf8');
+        let outputText = '';
 
-        for (var i = 0; i < bufferText.length; i++) {
-            if(bufferText.charCodeAt(i) < 0x1f) {
-                outputText += "[" + bufferText.charCodeAt(i) + "]"
+        for (let i = 0; i < bufferText.length; i++) {
+            if (bufferText.charCodeAt(i) < 0x1f) {
+                outputText += `[${bufferText.charCodeAt(i)}]`;
             } else {
-                outputText += bufferText[i]
+                outputText += bufferText[i];
             }
         }
 
