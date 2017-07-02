@@ -24,6 +24,16 @@ class ServerMessage {
         this._offset += buffer.length;
     }
 
+    writeByte(byte) {
+        const buf = Buffer.alloc(1);
+        buf.writeInt8(byte);
+        buf.write(buf);
+    }
+
+    writeBoolean(boolean) {
+        this.writeByte(boolean ? 1 : 0);
+    }
+
     writeInt(int) {
         const buf = Buffer.alloc(4);
         buf.writeInt32BE(int);
