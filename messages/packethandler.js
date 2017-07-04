@@ -1,5 +1,6 @@
 const Incoming = require('./incoming');
 const Handshake = require('./handlers/handshake');
+const Users = require('./handlers/users');
 
 class PacketHandler {
     constructor() {
@@ -28,9 +29,13 @@ class PacketHandler {
     }
 
     registerHandlers() {
+        // handshake
         this.addHandler(Incoming.ReleaseEventHandler, Handshake.ReleaseEventHandler);
         this.addHandler(Incoming.MachineIdEvent, Handshake.MachineIdEvent);
         this.addHandler(Incoming.AuthTicketEvent, Handshake.AuthTicketEvent);
+
+        // users
+        this.addHandler(Incoming.RequestPlayerDataEvent, Users.RequestPlayerDataEvent);
     }
 }
 

@@ -1,7 +1,7 @@
 const ServerMessage = require('../../networking/servermessage');
 const Handshake = require('../composers/handshake');
 const PlayerFactory = require('../../database/factories/player');
-const util = require('util');
+const Outgoing = require('../outgoing');
 
 function releaseEventHandler(message) {
     console.log(`Client with release ${message.readString()} connected on the client type ${message.readString()}`);
@@ -15,20 +15,15 @@ function machineIdEvent(message, client) {
 }
 
 function authTicketEvent(message, client) {
-    const composer = 2491;
-    const packet = new ServerMessage(composer);
-
     const ticket = message.readString();
 
     PlayerFactory.fromSSOTicket(ticket).then((player) => {
-        console.log(util.inspect(player));
+        client.sendPacket(new ServerMessage(Outgoing.PlayerAuthOkComposer));
+        client.setPlayer(player);
     }).catch((err) => {
         console.error(err);
         client.disconnect();
     });
-
-    // 'auth ok composer' can be empty
-    client.sendPacket(packet);
 }
 
 module.exports.ReleaseEventHandler = releaseEventHandler;

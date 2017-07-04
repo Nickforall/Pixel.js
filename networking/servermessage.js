@@ -27,7 +27,7 @@ class ServerMessage {
     writeByte(byte) {
         const buf = Buffer.alloc(1);
         buf.writeInt8(byte);
-        buf.write(buf);
+        this.write(buf);
     }
 
     writeBoolean(boolean) {

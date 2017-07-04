@@ -6,10 +6,15 @@ class GameClient {
     constructor(socket) {
         this._socket = socket;
         this._machineId = null;
+        this._player = null;
     }
 
     set machineId(id) {
         this._machineId = id;
+    }
+
+    get player() {
+        return this._player;
     }
 
     disconnect() {
@@ -35,6 +40,10 @@ class GameClient {
 
         this._socket.write(packet.buffer);
         console.log(chalk.blue(`SERVER => ${packet.header} -> ${packet.debugBody()}`));
+    }
+
+    setPlayer(player) {
+        this._player = player;
     }
 }
 
