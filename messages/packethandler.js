@@ -1,5 +1,6 @@
 const Incoming = require('./incoming');
 const Handshake = require('./handlers/handshake');
+const HotelView = require('./handlers/hotelview');
 const Users = require('./handlers/users');
 
 class PacketHandler {
@@ -36,6 +37,9 @@ class PacketHandler {
 
         // users
         this.addHandler(Incoming.RequestPlayerDataEvent, Users.RequestPlayerDataEvent);
+
+        // hotel view
+        this.addHandler(Incoming.HotelViewDataEvent, HotelView.HotelViewDataEvent);
     }
 }
 

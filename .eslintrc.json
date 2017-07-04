@@ -13,7 +13,8 @@
             "objects": "always",
             "functions": "never"
         }],
-        "class-methods-use-this": "off"
+        "class-methods-use-this": "off",
+        "no-restricted-syntax": ["off", "ForOfStatement"]
     },
     "globals": {
         "Pixel": true

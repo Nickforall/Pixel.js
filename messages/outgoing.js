@@ -4,4 +4,5 @@ module.exports = {
     PlayerDataComposer: 2725,
     PlayerPerksComposer: 2586,
     PlayerHomeComposer: 2875,
+    HotelViewDataComposer: 1745,
 };
