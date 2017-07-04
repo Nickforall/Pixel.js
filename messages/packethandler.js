@@ -41,6 +41,7 @@ class PacketHandler {
 
         // hotel view
         this.addHandler(Incoming.HotelViewDataEvent, HotelView.HotelViewDataEvent);
+        this.addHandler(Incoming.RequestBonusRareEvent, HotelView.RequestBonusRareEvent);
     }
 }
 

@@ -69,7 +69,7 @@ class GameServer {
         let color = chalk.yellow;
         if (Pixel.getPacketHandler().hasHandler(header)) color = chalk.green;
 
-        if (config.logPackets && !config.ignoredIncomingPackets.indexOf(header) > -1) {
+        if (config.logPackets && !(config.ignoredIncomingPackets.indexOf(header) > -1)) {
             console.log(color(`CLIENT => ${packet.header} -> ${packet.debugBody()}`));
         }
 

@@ -12,13 +12,15 @@ function hotelViewDataEvent(message, client) {
             } else {
                 client.sendPacket(new HotelView.HotelViewDataComposer(data, data));
             }
-
-            // loop only once because otherwhise i break shit, why is there even a lop?
-            break;
         }
     } else {
         client.sendPacket(new HotelView.HotelViewDataComposer(data, data.split(',')[data.split(',').length - 1]));
     }
 }
 
+function requestBonusRareEvent(message, client) {
+    client.sendPacket(new HotelView.HotelViewBonusRareComposer(client.player));
+}
+
 module.exports.HotelViewDataEvent = hotelViewDataEvent;
+module.exports.RequestBonusRareEvent = requestBonusRareEvent;
