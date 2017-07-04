@@ -3,6 +3,7 @@ const net = require('net');
 const config = require('../config.json');
 const GameClient = require('../game/gameclient');
 const chalk = require('chalk');
+const bufferHelpers = require('./bufferhelpers');
 
 class GameServer {
     constructor() {
@@ -20,10 +21,9 @@ class GameServer {
     _socketDataHandler(socket, data) {
         // transform buffer in our servermessage format
         let buffer = Buffer.from(data);
-        buffer = new ClientMessage(buffer);
 
         // check if the client expects crossdomain shit
-        const isXml = String.fromCharCode(buffer.readByte()) === '<';
+        const isXml = String.fromCharCode(bufferHelpers.read(buffer, 1, 0)[0]) === '<';
         if (isXml) {
             console.log('Sending crossdomain policy');
             socket.write('<?xml version="1.0"?>\r\n' +
@@ -35,11 +35,15 @@ class GameServer {
             return;
         }
 
-        // make sure the buffer's offset is back at 0 if it's no xml
-        buffer.resetIndex();
+        // while the buffer has a length integer at the start
+        while (buffer.length >= 4) {
+            const length = bufferHelpers.read(buffer, 4, 0).readInt32BE() + 4;
 
-        // handle a habbo packet
-        this.handlePacket(buffer, socket);
+            // handle a habbo packet
+            this.handlePacket(buffer.slice(0, length), socket);
+
+            buffer = buffer.slice(length);
+        }
     }
 
     /**
@@ -54,7 +58,9 @@ class GameServer {
         }, () => console.log('Currently listening socket server on port ::%s', port));
     }
 
-    handlePacket(packet, socket) {
+    handlePacket(buffer, socket) {
+        const packet = new ClientMessage(buffer);
+
         packet.readInt();
         const header = packet.readShort();
 
