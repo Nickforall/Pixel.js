@@ -13,7 +13,7 @@ function hotelViewDataEvent(message, client) {
                 client.sendPacket(new HotelView.HotelViewDataComposer(data, data));
             }
 
-            // loop only once because otherwhise i break shit
+            // loop only once because otherwhise i break shit, why is there even a lop?
             break;
         }
     } else {

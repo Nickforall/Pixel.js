@@ -4,7 +4,7 @@ const ServerMessage = require('../../networking/servermessage');
 
 const Player = require('../../game/players/player');
 
-class PlayerDataComposer extends Composer {
+class PlayerComposer extends Composer {
     constructor(player) {
         super();
 
@@ -14,7 +14,9 @@ class PlayerDataComposer extends Composer {
             throw new Error('Invalid parameter passed to PlayerDataComposer, expected player');
         }
     }
+}
 
+class PlayerDataComposer extends PlayerComposer {
     compose() {
         const message = new ServerMessage(Outgoing.PlayerDataComposer);
 
@@ -37,17 +39,7 @@ class PlayerDataComposer extends Composer {
     }
 }
 
-class PlayerPerksComposer extends Composer {
-    constructor(player) {
-        super();
-
-        this.player = player;
-
-        if (!(player instanceof Player)) {
-            throw new Error('Invalid parameter passed to PlayerDataComposer, expected player');
-        }
-    }
-
+class PlayerPerksComposer extends PlayerComposer {
     compose() {
         const message = new ServerMessage(Outgoing.PlayerPerksComposer);
 
@@ -65,17 +57,7 @@ class PlayerPerksComposer extends Composer {
     }
 }
 
-class PlayerHomeComposer extends Composer {
-    constructor(player) {
-        super();
-
-        this.player = player;
-
-        if (!(player instanceof Player)) {
-            throw new Error('Invalid parameter passed to PlayerDataComposer, expected player');
-        }
-    }
-
+class PlayerHomeComposer extends PlayerComposer {
     compose() {
         const message = new ServerMessage(Outgoing.PlayerHomeComposer);
 
@@ -86,6 +68,17 @@ class PlayerHomeComposer extends Composer {
     }
 }
 
+class PlayerCreditsComposer extends PlayerComposer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerCreditsComposer);
+
+        message.writeString(`${this.player.credits}.0`);
+
+        return message;
+    }
+}
+
 module.exports.PlayerDataComposer = PlayerDataComposer;
 module.exports.PlayerPerksComposer = PlayerPerksComposer;
 module.exports.PlayerHomeComposer = PlayerHomeComposer;
+module.exports.PlayerCreditsComposer = PlayerCreditsComposer;

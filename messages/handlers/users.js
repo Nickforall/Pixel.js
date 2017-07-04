@@ -8,4 +8,9 @@ function requestPlayerDataEvent(message, client) {
     client.sendPacket(new Users.PlayerHomeComposer(player));
 }
 
+function requestPlayerCurrencyEvent(message, client) {
+    client.sendPacket(new Users.PlayerCreditsComposer(client.player));
+}
+
 module.exports.RequestPlayerDataEvent = requestPlayerDataEvent;
+module.exports.RequestPlayerCurrencyEvent = requestPlayerCurrencyEvent;
