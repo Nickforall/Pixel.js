@@ -8,4 +8,6 @@ module.exports = {
     RequestBonusRareEvent: 957,
     RequestPlayerProfileEvent: 3265,
     RequestPlayerClubDataEvent: 3166,
+    GetClubDataEvent: 3285,
+    RequestPlayerWardrobeEvent: 2742,
 };

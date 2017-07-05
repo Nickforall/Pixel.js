@@ -40,6 +40,8 @@ class PacketHandler {
         this.addHandler(Incoming.RequestPlayerCurrencyEvent, Users.RequestPlayerCurrencyEvent);
         this.addHandler(Incoming.RequestPlayerProfileEvent, Users.RequestPlayerProfileEvent);
         this.addHandler(Incoming.RequestPlayerClubDataEvent, Users.RequestPlayerClubDataEvent);
+        this.addHandler(Incoming.RequestPlayerWardrobeEvent, Users.RequestPlayerWardrobeEvent);
+        this.addHandler(Incoming.GetClubDataEvent, Users.GetClubDataEvent);
 
         // hotel view
         this.addHandler(Incoming.HotelViewDataEvent, HotelView.HotelViewDataEvent);

@@ -10,4 +10,6 @@ module.exports = {
     PlayerProfileComposer: 3898,
     GenericAlertComposer: 3801,
     PlayerClubComposer: 954,
+    ClubDataComposer: 2405,
+    PlayerWardrobeComposer: 3315,
 };

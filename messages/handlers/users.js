@@ -36,7 +36,17 @@ function requestPlayerClubDataEvent(message, client) {
     client.sendPacket(new Users.PlayerClubComposer(client.player));
 }
 
+function requestPlayerWardrobeEvent(message, client) {
+    client.sendPacket(new Users.PlayerWardrobeComposer(client.player));
+}
+
+function getClubDataEvent(message, client) {
+    client.sendPacket(new Users.ClubDataComposer(message.readInt()));
+}
+
 module.exports.RequestPlayerDataEvent = requestPlayerDataEvent;
 module.exports.RequestPlayerCurrencyEvent = requestPlayerCurrencyEvent;
 module.exports.RequestPlayerProfileEvent = requestPlayerProfileEvent;
 module.exports.RequestPlayerClubDataEvent = requestPlayerClubDataEvent;
+module.exports.RequestPlayerWardrobeEvent = requestPlayerWardrobeEvent;
+module.exports.GetClubDataEvent = getClubDataEvent;

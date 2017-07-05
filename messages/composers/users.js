@@ -44,13 +44,33 @@ class PlayerPerksComposer extends PlayerComposer {
     compose() {
         const message = new ServerMessage(Outgoing.PlayerPerksComposer);
 
-        message.writeInt(2); // length of the list with perks
+        message.writeInt(7); // length of the list with perks
 
-        message.writeString('HABBO_CLUB_OFFER_BETA');
+        message.writeString('CITIZEN');
         message.writeString('');
         message.writeBoolean(true);
 
+        message.writeString('TRADE');
+        message.writeString('');
+        message.writeBoolean(true);
+
+        message.writeString('NAVIGATOR_PHASE_ONE_2014');
+        message.writeString('');
+        message.writeBoolean(true);
+
+        message.writeString('CAMERA');
+        message.writeString('');
+        message.writeBoolean(false);
+
         message.writeString('NAVIGATOR_PHASE_TWO_2014');
+        message.writeString('');
+        message.writeBoolean(true);
+
+        message.writeString('MOUSE_ZOOM');
+        message.writeString('');
+        message.writeBoolean(true);
+
+        message.writeString('HABBO_CLUB_OFFER_BETA');
         message.writeString('');
         message.writeBoolean(true);
 
@@ -138,9 +158,50 @@ class PlayerClubComposer extends PlayerComposer {
     }
 }
 
+class ClubDataComposer extends Composer {
+    // this packet is pretty vague, for all I know it expects a length to iterate over something
+    // and it also wants some integer back
+
+    constructor(int) {
+        super();
+
+        this.unknown = int;
+    }
+
+    compose() {
+        const message = new ServerMessage(Outgoing.ClubDataComposer);
+
+        // length of the iterated items
+        message.writeInt(0);
+
+        // the unknown int (possibly window identifier)
+        message.writeInt(this.unknown);
+
+        return message;
+    }
+}
+
+class PlayerWardrobeComposer extends PlayerComposer {
+    // this packet should send a player's saved
+    // we have a placeholder to get changing looks to work
+
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerWardrobeComposer);
+
+        message.writeInt(1);
+        // iterate over wardrobe items
+        message.writeInt(0); // length of looks
+
+        return message;
+    }
+
+}
+
 module.exports.PlayerDataComposer = PlayerDataComposer;
 module.exports.PlayerPerksComposer = PlayerPerksComposer;
 module.exports.PlayerHomeComposer = PlayerHomeComposer;
 module.exports.PlayerCreditsComposer = PlayerCreditsComposer;
 module.exports.PlayerProfileComposer = PlayerProfileComposer;
 module.exports.PlayerClubComposer = PlayerClubComposer;
+module.exports.ClubDataComposer = ClubDataComposer;
+module.exports.PlayerWardrobeComposer = PlayerWardrobeComposer;
