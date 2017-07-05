@@ -128,8 +128,8 @@ class PlayerClubComposer extends PlayerComposer {
         message.writeInt(0);
 
         const remaining = (this.player.subscription.expiration * 1000) - Date.now();
-        if (remaining > 65535 || remaining <= 0) {
-            message.writeInt(65535);
+        if (remaining > 0x7fffffff || remaining <= 0) {
+            message.writeInt(0x7fffffff);
         } else {
             message.writeInt(remaining);
         }
