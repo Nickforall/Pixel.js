@@ -2,6 +2,7 @@ const Incoming = require('./incoming');
 const Handshake = require('./handlers/handshake');
 const HotelView = require('./handlers/hotelview');
 const Users = require('./handlers/users');
+const Messenger = require('./handlers/messenger');
 
 class PacketHandler {
     constructor() {
@@ -46,6 +47,9 @@ class PacketHandler {
         // hotel view
         this.addHandler(Incoming.HotelViewDataEvent, HotelView.HotelViewDataEvent);
         this.addHandler(Incoming.RequestBonusRareEvent, HotelView.RequestBonusRareEvent);
+
+        // messenger
+        this.addHandler(Incoming.InitializeMessengerEvent, Messenger.InitializeMessengerEvent);
     }
 }
 

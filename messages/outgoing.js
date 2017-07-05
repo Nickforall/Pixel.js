@@ -12,4 +12,6 @@ module.exports = {
     PlayerClubComposer: 954,
     ClubDataComposer: 2405,
     PlayerWardrobeComposer: 3315,
+    InitializeMessengerComposer: 1605,
+    PlayerFriendsComposer: 3130,
 };

@@ -16,7 +16,7 @@ class GameServer {
         socket.setNoDelay(true);
 
         socket.on('data', this._socketDataHandler.bind(this, socket));
-        socket.on('disconnect', this._socketDisconnectHandler.bind(this, socket));
+        socket.on('end', this._socketDisconnectHandler.bind(this, socket));
     }
 
     _socketDisconnectHandler(socket) {

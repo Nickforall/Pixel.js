@@ -197,6 +197,8 @@ class PlayerWardrobeComposer extends PlayerComposer {
 
 }
 
+module.exports.PlayerComposer = PlayerComposer;
+
 module.exports.PlayerDataComposer = PlayerDataComposer;
 module.exports.PlayerPerksComposer = PlayerPerksComposer;
 module.exports.PlayerHomeComposer = PlayerHomeComposer;

@@ -41,6 +41,7 @@ class GameClient {
         }
 
         if (!(packet instanceof ServerMessage)) {
+            if (packet === null) return;
             throw new Error("Provided packet isn't a valid packet.");
         }
 
