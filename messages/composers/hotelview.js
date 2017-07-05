@@ -1,6 +1,7 @@
 const Composer = require('./composer');
 const Outgoing = require('../outgoing');
 const ServerMessage = require('../../networking/servermessage');
+const config = require('../../config.json');
 
 class HotelViewDataComposer extends Composer {
     constructor(data1, data2) {
@@ -24,10 +25,10 @@ class HotelViewBonusRareComposer extends Composer {
     compose() {
         const message = new ServerMessage(Outgoing.HotelViewBonusRareComposer);
 
-        message.writeString('prizetrophy_breed_gold');
-        message.writeInt(0); // furni_id
-        message.writeInt(120); // objective
-        message.writeInt(120); // objective points remaining
+        message.writeString(config.hotelviewBonusRare.name);
+        message.writeInt(config.hotelviewBonusRare.id); // furni_id
+        message.writeInt(config.hotelviewBonusRare.objective); // objective
+        message.writeInt(config.hotelviewBonusRare.objective - 0); // objective points remaining
 
         return message;
     }

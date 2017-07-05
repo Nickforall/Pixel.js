@@ -1,11 +1,16 @@
 {
     "logPackets": true,
-    "ignoredIncomingPackets": [],
+    "ignoredIncomingPackets": [4000, 1053, 295],
     "mysql": {
         "host": "",
         "port": 3306,
         "user": "",
         "pass": "",
         "db": ""
+    },
+    "hotelviewBonusRare": {
+        "name": "prizetrophy_bb_s",
+        "furni_id": 0,
+        "objective": 120
     }
 }
