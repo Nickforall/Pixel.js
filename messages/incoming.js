@@ -7,4 +7,5 @@ module.exports = {
     HotelViewDataEvent: 2912,
     RequestBonusRareEvent: 957,
     RequestPlayerProfileEvent: 3265,
+    RequestPlayerClubDataEvent: 3166,
 };

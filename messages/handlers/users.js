@@ -32,6 +32,11 @@ function requestPlayerProfileEvent(message, client) {
     }
 }
 
+function requestPlayerClubDataEvent(message, client) {
+    client.sendPacket(new Users.PlayerClubComposer(client.player));
+}
+
 module.exports.RequestPlayerDataEvent = requestPlayerDataEvent;
 module.exports.RequestPlayerCurrencyEvent = requestPlayerCurrencyEvent;
 module.exports.RequestPlayerProfileEvent = requestPlayerProfileEvent;
+module.exports.RequestPlayerClubDataEvent = requestPlayerClubDataEvent;

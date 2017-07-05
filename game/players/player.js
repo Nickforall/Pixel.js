@@ -1,4 +1,5 @@
 const Alerts = require('../../messages/composers/alerts');
+const PlayerSubscription = require('./playersubscription');
 
 class Player {
     constructor(id, name, motto, figure, gender, credits, home, club, created) {
@@ -9,7 +10,7 @@ class Player {
         this.gender = gender;
         this.credits = credits;
         this.home = home;
-        this.club = club;
+        this.subscription = new PlayerSubscription(club);
         this.created = created;
 
         this.isOnline = false;

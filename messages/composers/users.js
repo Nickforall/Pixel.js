@@ -104,8 +104,43 @@ class PlayerProfileComposer extends PlayerComposer {
     }
 }
 
+class PlayerClubComposer extends PlayerComposer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerClubComposer);
+
+        message.writeString('club_habbo');
+
+        if (this.player.subscription.hasClub()) {
+            message.writeInt(this.player.subscription.days);
+            message.writeInt(1);
+            message.writeInt(this.player.subscription.months);
+            message.writeInt(this.player.subscription.years);
+        } else {
+            message.writeInt(0);
+            message.writeInt(7);
+            message.writeInt(0);
+            message.writeInt(1);
+        }
+
+        message.writeBoolean(true);
+        message.writeBoolean(true);
+        message.writeInt(0);
+        message.writeInt(0);
+
+        const remaining = (this.player.subscription.expiration * 1000) - Date.now();
+        if (remaining > 65535 || remaining <= 0) {
+            message.writeInt(65535);
+        } else {
+            message.writeInt(remaining);
+        }
+
+        return message;
+    }
+}
+
 module.exports.PlayerDataComposer = PlayerDataComposer;
 module.exports.PlayerPerksComposer = PlayerPerksComposer;
 module.exports.PlayerHomeComposer = PlayerHomeComposer;
 module.exports.PlayerCreditsComposer = PlayerCreditsComposer;
 module.exports.PlayerProfileComposer = PlayerProfileComposer;
+module.exports.PlayerClubComposer = PlayerClubComposer;

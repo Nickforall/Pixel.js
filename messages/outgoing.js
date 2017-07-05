@@ -9,4 +9,5 @@ module.exports = {
     HotelViewBonusRareComposer: 1533,
     PlayerProfileComposer: 3898,
     GenericAlertComposer: 3801,
+    PlayerClubComposer: 954,
 };
