@@ -30,7 +30,8 @@ function fromSSOTicket(ticket) {
                 sqlPlayer.gender,
                 sqlPlayer.credits,
                 sqlPlayer.homeroom_id,
-                sqlPlayer.club_expiration
+                sqlPlayer.club_expiration,
+                sqlPlayer.account_created
             ));
         });
     });
@@ -64,7 +65,8 @@ function fromId(id) {
                 sqlPlayer.gender,
                 sqlPlayer.credits,
                 sqlPlayer.homeroom_id,
-                sqlPlayer.club_expiration
+                sqlPlayer.club_expiration,
+                sqlPlayer.account_created
             ));
         });
     });

@@ -1,6 +1,7 @@
 const Composer = require('./composer');
 const Outgoing = require('../outgoing');
 const ServerMessage = require('../../networking/servermessage');
+const moment = require('moment');
 
 const Player = require('../../game/players/player');
 
@@ -86,7 +87,7 @@ class PlayerProfileComposer extends PlayerComposer {
         message.writeString(this.player.name);
         message.writeString(this.player.figure);
         message.writeString(this.player.motto);
-        message.writeString('01-01-1970 00:00:00'); // account created at most likely
+        message.writeString(moment.unix(this.player.created).format('DD-MM-YYYY HH:mm:ss'));
         message.writeInt(0); // achievement score
         message.writeInt(0); // friends
         message.writeBoolean(false); // is the requester friends?

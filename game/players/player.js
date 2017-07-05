@@ -1,5 +1,5 @@
 class Player {
-    constructor(id, name, motto, figure, gender, credits, home, club) {
+    constructor(id, name, motto, figure, gender, credits, home, club, created) {
         this.id = id;
         this.name = name;
         this.motto = motto;
@@ -9,6 +9,7 @@ class Player {
         this.home = home;
         this.club = club;
         this.isOnline = false;
+        this.created = created;
     }
 }
 
