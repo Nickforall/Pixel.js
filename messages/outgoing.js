@@ -8,4 +8,5 @@ module.exports = {
     HotelViewDataComposer: 1745,
     HotelViewBonusRareComposer: 1533,
     PlayerProfileComposer: 3898,
+    GenericAlertComposer: 3801,
 };

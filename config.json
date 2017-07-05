@@ -12,5 +12,9 @@
         "name": "prizetrophy_bb_s",
         "furni_id": 0,
         "objective": 120
+    },
+    "welcomeAlert": {
+        "enabled": true,
+        "message": "Powered by PixelEmulator."
     }
 }

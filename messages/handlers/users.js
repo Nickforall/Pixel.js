@@ -1,5 +1,6 @@
 const Users = require('../composers/users');
 const PlayerFactory = require('../../database/factories/player');
+const config = require('../../config.json');
 
 function requestPlayerDataEvent(message, client) {
     const player = client.player;
@@ -7,6 +8,10 @@ function requestPlayerDataEvent(message, client) {
     client.sendPacket(new Users.PlayerDataComposer(player));
     client.sendPacket(new Users.PlayerPerksComposer(player));
     client.sendPacket(new Users.PlayerHomeComposer(player));
+
+    if (config.welcomeAlert.enabled) {
+        player.sendAlert(config.welcomeAlert.message);
+    }
 }
 
 function requestPlayerCurrencyEvent(message, client) {

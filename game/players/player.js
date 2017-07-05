@@ -1,3 +1,5 @@
+const Alerts = require('../../messages/composers/alerts');
+
 class Player {
     constructor(id, name, motto, figure, gender, credits, home, club, created) {
         this.id = id;
@@ -8,8 +10,16 @@ class Player {
         this.credits = credits;
         this.home = home;
         this.club = club;
-        this.isOnline = false;
         this.created = created;
+
+        this.isOnline = false;
+        this.gameClient = null;
+    }
+
+    sendAlert(message) {
+        if (this.gameClient) {
+            this.gameClient.sendPacket(new Alerts.GenericAlertComposer(message));
+        }
     }
 }
 
