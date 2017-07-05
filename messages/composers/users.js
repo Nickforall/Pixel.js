@@ -78,7 +78,33 @@ class PlayerCreditsComposer extends PlayerComposer {
     }
 }
 
+class PlayerProfileComposer extends PlayerComposer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerProfileComposer);
+
+        message.writeInt(this.player.id);
+        message.writeString(this.player.name);
+        message.writeString(this.player.figure);
+        message.writeString(this.player.motto);
+        message.writeString('01-01-1970 00:00:00'); // account created at most likely
+        message.writeInt(0); // achievement score
+        message.writeInt(0); // friends
+        message.writeBoolean(false); // is the requester friends?
+        message.writeBoolean(false); // did the requester send friend request?
+        message.writeBoolean(this.player.isOnline); // is the habbo online?
+
+        message.writeInt(0); // amount of guilds
+        // here you should iterate over guilds
+
+        message.writeInt(0); // last online in seconds ago
+        message.writeBoolean(true); // unknown
+
+        return message;
+    }
+}
+
 module.exports.PlayerDataComposer = PlayerDataComposer;
 module.exports.PlayerPerksComposer = PlayerPerksComposer;
 module.exports.PlayerHomeComposer = PlayerHomeComposer;
 module.exports.PlayerCreditsComposer = PlayerCreditsComposer;
+module.exports.PlayerProfileComposer = PlayerProfileComposer;

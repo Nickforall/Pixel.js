@@ -7,4 +7,5 @@ module.exports = {
     PlayerCreditsComposer: 3475,
     HotelViewDataComposer: 1745,
     HotelViewBonusRareComposer: 1533,
+    PlayerProfileComposer: 3898,
 };

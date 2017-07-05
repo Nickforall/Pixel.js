@@ -1,37 +1,76 @@
 const Player = require('../../game/players/player');
 
-module.exports = {
-    fromSSOTicket: function (ticket) {
-        const connection = Pixel.getDatabase().connection;
+// NOTE: should reuse code here in some way.
 
-        return new Promise((resolve, reject) => {
-            connection.query({
-                sql: 'SELECT * FROM `users` WHERE `sso` = ? LIMIT 1',
-                values: [ticket],
-            }, (error, results) => {
-                if (error) {
-                    reject(error);
-                    return;
-                }
+function fromSSOTicket(ticket) {
+    const connection = Pixel.getDatabase().connection;
 
-                if (!results[0]) {
-                    reject(new Error('User not found'));
-                    return;
-                }
+    return new Promise((resolve, reject) => {
+        connection.query({
+            sql: 'SELECT * FROM `users` WHERE `sso` = ? LIMIT 1',
+            values: [ticket],
+        }, (error, results) => {
+            if (error) {
+                reject(error);
+                return;
+            }
 
-                const sqlPlayer = results[0];
+            if (!results[0]) {
+                reject(new Error('User not found'));
+                return;
+            }
 
-                resolve(new Player(
-                    sqlPlayer.id,
-                    sqlPlayer.nickname,
-                    sqlPlayer.motto,
-                    sqlPlayer.figure,
-                    sqlPlayer.gender,
-                    sqlPlayer.credits,
-                    sqlPlayer.homeroom_id,
-                    sqlPlayer.club_expiration
-                ));
-            });
+            const sqlPlayer = results[0];
+
+            resolve(new Player(
+                sqlPlayer.id,
+                sqlPlayer.nickname,
+                sqlPlayer.motto,
+                sqlPlayer.figure,
+                sqlPlayer.gender,
+                sqlPlayer.credits,
+                sqlPlayer.homeroom_id,
+                sqlPlayer.club_expiration
+            ));
         });
-    },
+    });
+}
+
+function fromId(id) {
+    const connection = Pixel.getDatabase().connection;
+
+    return new Promise((resolve, reject) => {
+        connection.query({
+            sql: 'SELECT * FROM `users` WHERE `id` = ? LIMIT 1',
+            values: [id],
+        }, (error, results) => {
+            if (error) {
+                reject(error);
+                return;
+            }
+
+            if (!results[0]) {
+                reject(new Error('User not found'));
+                return;
+            }
+
+            const sqlPlayer = results[0];
+
+            resolve(new Player(
+                sqlPlayer.id,
+                sqlPlayer.nickname,
+                sqlPlayer.motto,
+                sqlPlayer.figure,
+                sqlPlayer.gender,
+                sqlPlayer.credits,
+                sqlPlayer.homeroom_id,
+                sqlPlayer.club_expiration
+            ));
+        });
+    });
+}
+
+module.exports = {
+    fromSSOTicket: fromSSOTicket,
+    fromId: fromId,
 };

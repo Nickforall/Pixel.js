@@ -18,8 +18,14 @@ class GameClient {
     }
 
     disconnect() {
-        this._socket.end();
-        this._socket.destroy();
+        if (this._player) {
+            Pixel.getPlayerManager().removePlayer(this._player);
+        }
+
+        if (!this._socket.destroyed) {
+            this._socket.end();
+            this._socket.destroy();
+        }
     }
 
     sendPacket(packet) {
@@ -44,6 +50,8 @@ class GameClient {
 
     setPlayer(player) {
         this._player = player;
+        this._player.isOnline = true;
+        Pixel.getPlayerManager().registerOnlinePlayer(this._player);
     }
 }
 

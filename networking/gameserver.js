@@ -16,6 +16,15 @@ class GameServer {
         socket.setNoDelay(true);
 
         socket.on('data', this._socketDataHandler.bind(this, socket));
+        socket.on('disconnect', this._socketDisconnectHandler.bind(this, socket));
+    }
+
+    _socketDisconnectHandler(socket) {
+        if (socket.gameclient.player) {
+            console.log(`Disconnecting ${socket.gameclient.player.name}`);
+        }
+
+        socket.gameclient.disconnect();
     }
 
     _socketDataHandler(socket, data) {

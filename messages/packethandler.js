@@ -38,6 +38,7 @@ class PacketHandler {
         // users
         this.addHandler(Incoming.RequestPlayerDataEvent, Users.RequestPlayerDataEvent);
         this.addHandler(Incoming.RequestPlayerCurrencyEvent, Users.RequestPlayerCurrencyEvent);
+        this.addHandler(Incoming.RequestPlayerProfileEvent, Users.RequestPlayerProfileEvent);
 
         // hotel view
         this.addHandler(Incoming.HotelViewDataEvent, HotelView.HotelViewDataEvent);
