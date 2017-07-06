@@ -53,5 +53,40 @@ class PlayerFriendsComposer extends Composer {
     }
 }
 
+class UpdateFriendComposer extends Composer {
+    constructor(p) {
+        super();
+
+        this.player = p;
+    }
+
+    compose() {
+        const message = new ServerMessage(Outgoing.UpdateFriendComposer);
+        const buddy = this.player;
+
+        message.writeInt(0);
+        message.writeInt(1);
+        message.writeInt(0);
+
+        message.writeInt(buddy.id);
+        message.writeString(buddy.name);
+        message.writeInt(buddy.gender.toUpperCase() === 'M' ? 0 : 1);
+        message.writeBoolean(Pixel.getPlayerManager().getPlayer(buddy.id) !== undefined);
+        message.writeBoolean(false); // whether player is in a room
+        message.writeString(buddy.figure);
+        message.writeInt(0);
+        message.writeString(buddy.motto);
+        message.writeString('');
+        message.writeString('');
+        message.writeBoolean(false);
+        message.writeBoolean(false);
+        message.writeBoolean(false);
+        message.writeShort(0);
+
+        return message;
+    }
+}
+
 module.exports.InitializeMessengerComposer = InitializeMessengerComposer;
 module.exports.PlayerFriendsComposer = PlayerFriendsComposer;
+module.exports.UpdateFriendComposer = UpdateFriendComposer;

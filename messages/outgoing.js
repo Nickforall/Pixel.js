@@ -14,4 +14,5 @@ module.exports = {
     PlayerWardrobeComposer: 3315,
     InitializeMessengerComposer: 1605,
     PlayerFriendsComposer: 3130,
+    UpdateFriendComposer: 2800,
 };

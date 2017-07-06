@@ -14,7 +14,7 @@
         "objective": 120
     },
     "welcomeAlert": {
-        "enabled": true,
+        "enabled": false,
         "message": "Powered by PixelEmulator."
     }
 }

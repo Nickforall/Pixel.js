@@ -51,9 +51,10 @@ class GameClient {
 
     setPlayer(player) {
         this._player = player;
-        this._player.isOnline = true;
         this._player.gameClient = this;
         Pixel.getPlayerManager().registerOnlinePlayer(this._player);
+
+        this._player.setOnline();
     }
 }
 
