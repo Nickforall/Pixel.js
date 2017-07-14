@@ -15,4 +15,6 @@ module.exports = {
     InitializeMessengerComposer: 1605,
     PlayerFriendsComposer: 3130,
     UpdateFriendComposer: 2800,
+    NavigatorMetaDataComposer: 3052,
+    NavigatorSearchResultComposer: 2690,
 };

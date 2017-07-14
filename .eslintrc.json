@@ -14,7 +14,8 @@
             "functions": "never"
         }],
         "class-methods-use-this": "off",
-        "no-restricted-syntax": ["off", "ForOfStatement"]
+        "no-restricted-syntax": ["off", "ForOfStatement"],
+        "no-bitwise": "off"
     },
     "globals": {
         "Pixel": true

@@ -11,4 +11,6 @@ module.exports = {
     GetClubDataEvent: 3285,
     RequestPlayerWardrobeEvent: 2742,
     InitializeMessengerEvent: 2781,
+    RequestNavigatorDataEvent: 2110,
+    SearchNavigatorEvent: 249,
 };

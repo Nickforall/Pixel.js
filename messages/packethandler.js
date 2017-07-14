@@ -3,6 +3,7 @@ const Handshake = require('./handlers/handshake');
 const HotelView = require('./handlers/hotelview');
 const Users = require('./handlers/users');
 const Messenger = require('./handlers/messenger');
+const Navigator = require('./handlers/navigator');
 
 class PacketHandler {
     constructor() {
@@ -50,6 +51,10 @@ class PacketHandler {
 
         // messenger
         this.addHandler(Incoming.InitializeMessengerEvent, Messenger.InitializeMessengerEvent);
+
+        // Navigator
+        this.addHandler(Incoming.RequestNavigatorDataEvent, Navigator.RequestNavigatorDataEvent);
+        this.addHandler(Incoming.SearchNavigatorEvent, Navigator.SearchNavigatorEvent);
     }
 }
 

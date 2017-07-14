@@ -1,6 +1,7 @@
 const Users = require('../composers/users');
 const PlayerFactory = require('../../database/factories/player');
 const config = require('../../config.json');
+const PlayerController = require('../../database/controllers/player');
 
 function requestPlayerDataEvent(message, client) {
     const player = client.player;
@@ -25,7 +26,9 @@ function requestPlayerProfileEvent(message, client) {
         client.sendPacket(new Users.PlayerProfileComposer(Pixel.getPlayerManager().getPlayer(id)));
     } else {
         PlayerFactory.fromId(id).then((player) => {
-            client.sendPacket(new Users.PlayerProfileComposer(player));
+            PlayerController.getFriendCount(player.id).then((count) => {
+                client.sendPacket(new Users.PlayerProfileComposer(player, count));
+            });
         }).catch((err) => {
             console.error(err);
         });

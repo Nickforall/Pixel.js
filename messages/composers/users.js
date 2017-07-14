@@ -4,6 +4,7 @@ const ServerMessage = require('../../networking/servermessage');
 const moment = require('moment');
 
 const Player = require('../../game/players/player');
+const PlayerController = require('../../database/controllers/player');
 
 class PlayerComposer extends Composer {
     constructor(player) {
@@ -100,6 +101,13 @@ class PlayerCreditsComposer extends PlayerComposer {
 }
 
 class PlayerProfileComposer extends PlayerComposer {
+
+    constructor(player, friendscount) {
+        super(player);
+
+        this.friendscount = friendscount;
+    }
+
     compose() {
         const message = new ServerMessage(Outgoing.PlayerProfileComposer);
 
@@ -109,7 +117,7 @@ class PlayerProfileComposer extends PlayerComposer {
         message.writeString(this.player.motto);
         message.writeString(moment.unix(this.player.created).format('DD-MM-YYYY HH:mm:ss'));
         message.writeInt(0); // achievement score
-        message.writeInt(0); // friends
+        message.writeInt(this.friendscount); // friends
         message.writeBoolean(false); // is the requester friends?
         message.writeBoolean(false); // did the requester send friend request?
         message.writeBoolean(this.player.isOnline); // is the habbo online?

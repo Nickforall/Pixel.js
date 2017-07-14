@@ -1,6 +1,7 @@
 const PacketHandler = require('./messages/packethandler');
 const GameServer = require('./networking/gameserver');
 const Database = require('./database/database');
+const Navigator = require('./game/navigator/navigator');
 const PlayerManager = require('./game/players/playermanager');
 
 class Pixel {
@@ -9,6 +10,7 @@ class Pixel {
         this.gameServer = new GameServer();
         this.database = new Database();
         this.playerManager = new PlayerManager();
+        this.navigator = new Navigator();
 
         this.gameServer.listen(30002);
     }
@@ -27,6 +29,10 @@ class Pixel {
 
     getPlayerManager() {
         return this.playerManager;
+    }
+
+    getNavigator() {
+        return this.navigator;
     }
 }
 

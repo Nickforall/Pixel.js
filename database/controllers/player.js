@@ -40,6 +40,24 @@ class PlayerController {
             });
         });
     }
+
+    static getFriendCount(id) {
+        const connection = Pixel.getDatabase().connection;
+
+        return new Promise((resolve, reject) => {
+            connection.query({
+                sql: 'SELECT (SELECT COUNT(*) FROM user_relationships WHERE userid_0 = ?) + (SELECT COUNT(*) FROM user_relationships WHERE userid_1 = ?) AS count',
+                values: [id, id],
+            }, (error, results) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+
+                resolve(results[0].count);
+            });
+        });
+    }
 }
 
 module.exports = PlayerController;
