@@ -55,11 +55,11 @@ class ServerMessage {
 
     debugBody() {
         // make a somewhat readable output text
-        const bufferText = this.buffer.toString('utf8');
+        const bufferText = this.buffer.slice(6).toString('utf8');
         let outputText = '';
 
         for (let i = 0; i < bufferText.length; i++) {
-            if (bufferText.charCodeAt(i) <= 0x1f) {
+            if (bufferText.charCodeAt(i) < 0x20 || bufferText.charCodeAt(i) > 126) {
                 outputText += `[${bufferText.charCodeAt(i)}]`;
             } else {
                 outputText += bufferText[i];

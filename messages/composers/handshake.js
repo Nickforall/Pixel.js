@@ -16,4 +16,30 @@ class MachineIdComposer extends Composer {
     }
 }
 
+class UnknownQuestComposer extends Composer {
+    compose() {
+        // this composer has most likely something to do with quests and
+        // perhaps the seasonal calender.
+
+        const message = new ServerMessage(Outgoing.UnknownQuestComposer);
+        message.writeBoolean(false);
+
+        return message;
+    }
+}
+
+class SessionRightsComposer extends Composer {
+    compose() {
+        const message = new ServerMessage(Outgoing.SessionRightsComposer);
+
+        message.writeBoolean(true);
+        message.writeBoolean(true);
+        message.writeBoolean(true);
+
+        return message;
+    }
+}
+
 module.exports.MachineIdComposer = MachineIdComposer;
+module.exports.UnknownQuestComposer = UnknownQuestComposer;
+module.exports.SessionRightsComposer = SessionRightsComposer;

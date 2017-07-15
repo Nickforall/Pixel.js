@@ -13,4 +13,9 @@ module.exports = {
     InitializeMessengerEvent: 2781,
     RequestNavigatorDataEvent: 2110,
     SearchNavigatorEvent: 249,
+    RequestRoomDataEvent: 2230,
+    RequestNavigatorSettingsEvent: 1782,
+    GetRoomCategoriesEvent: 3027,
+    RequestPromotedRoomsEvent: 2908,
+    RequestCitizenshipEvent: 2127,
 };

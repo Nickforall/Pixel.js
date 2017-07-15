@@ -4,7 +4,6 @@ const ServerMessage = require('../../networking/servermessage');
 const moment = require('moment');
 
 const Player = require('../../game/players/player');
-const PlayerController = require('../../database/controllers/player');
 
 class PlayerComposer extends Composer {
     constructor(player) {
@@ -45,13 +44,41 @@ class PlayerPerksComposer extends PlayerComposer {
     compose() {
         const message = new ServerMessage(Outgoing.PlayerPerksComposer);
 
-        message.writeInt(7); // length of the list with perks
+        message.writeInt(15); // length of the list with perks
 
-        message.writeString('CITIZEN');
+        message.writeString('USE_GUIDE_TOOL');
+        message.writeString('requirement.unfulfilled.helper_level_4');
+        message.writeBoolean(false);
+
+        message.writeString('GIVE_GUIDE_TOURS');
+        message.writeString('');
+        message.writeBoolean(false);
+
+        message.writeString('JUDGE_CHAT_REVIEWS');
+        message.writeString('requirement.unfulfilled.helper_level_6');
+        message.writeBoolean(false);
+
+        message.writeString('VOTE_IN_COMPETITIONS');
+        message.writeString('requirement.unfulfilled.helper_level_2');
+        message.writeBoolean(true);
+
+        message.writeString('CALL_ON_HELPERS');
         message.writeString('');
         message.writeBoolean(true);
 
+        message.writeString('BUILDER_AT_WORK');
+        message.writeString('');
+        message.writeBoolean(true);
+
+        message.writeString('CITIZEN');
+        message.writeString('');
+        message.writeBoolean(false);
+
         message.writeString('TRADE');
+        message.writeString('requirement.unfulfilled.no_trade_lock');
+        message.writeBoolean(true);
+
+        message.writeString('HEIGHTMAP_EDITOR_BETA');
         message.writeString('');
         message.writeBoolean(true);
 
@@ -68,6 +95,10 @@ class PlayerPerksComposer extends PlayerComposer {
         message.writeBoolean(true);
 
         message.writeString('MOUSE_ZOOM');
+        message.writeString('');
+        message.writeBoolean(true);
+
+        message.writeString('NAVIGATOR_ROOM_THUMBNAIL_CAMERA');
         message.writeString('');
         message.writeBoolean(true);
 
@@ -202,7 +233,46 @@ class PlayerWardrobeComposer extends PlayerComposer {
 
         return message;
     }
+}
 
+class PlayerCurrencyComposer extends Composer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerCurrencyComposer);
+
+        message.writeInt(0); // length of currency types
+
+        return message;
+    }
+}
+
+class PlayerCitizenshipComposer extends Composer {
+    constructor(name) {
+        super();
+
+        this.name = name;
+    }
+
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerCitizenshipComposer);
+
+        message.writeString(this.name);
+        message.writeInt(4);
+        message.writeInt(4);
+
+        return message;
+    }
+}
+
+class PlayerPermissionsComposer extends PlayerComposer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerPermissionsComposer);
+
+        message.writeInt(this.player.subscription.hasClub() ? 2 : 0);
+        message.writeInt(1);
+        message.writeBoolean(false); // is ambassador?
+
+        return message;
+    }
 }
 
 module.exports.PlayerComposer = PlayerComposer;
@@ -215,3 +285,6 @@ module.exports.PlayerProfileComposer = PlayerProfileComposer;
 module.exports.PlayerClubComposer = PlayerClubComposer;
 module.exports.ClubDataComposer = ClubDataComposer;
 module.exports.PlayerWardrobeComposer = PlayerWardrobeComposer;
+module.exports.PlayerCurrencyComposer = PlayerCurrencyComposer;
+module.exports.PlayerCitizenshipComposer = PlayerCitizenshipComposer;
+module.exports.PlayerPermissionsComposer = PlayerPermissionsComposer;

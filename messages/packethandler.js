@@ -4,6 +4,8 @@ const HotelView = require('./handlers/hotelview');
 const Users = require('./handlers/users');
 const Messenger = require('./handlers/messenger');
 const Navigator = require('./handlers/navigator');
+const Rooms = require('./handlers/rooms');
+
 
 class PacketHandler {
     constructor() {
@@ -44,6 +46,7 @@ class PacketHandler {
         this.addHandler(Incoming.RequestPlayerClubDataEvent, Users.RequestPlayerClubDataEvent);
         this.addHandler(Incoming.RequestPlayerWardrobeEvent, Users.RequestPlayerWardrobeEvent);
         this.addHandler(Incoming.GetClubDataEvent, Users.GetClubDataEvent);
+        this.addHandler(Incoming.RequestCitizenshipEvent, Users.RequestCitizenshipEvent);
 
         // hotel view
         this.addHandler(Incoming.HotelViewDataEvent, HotelView.HotelViewDataEvent);
@@ -52,9 +55,17 @@ class PacketHandler {
         // messenger
         this.addHandler(Incoming.InitializeMessengerEvent, Messenger.InitializeMessengerEvent);
 
+        // rooms
+        this.addHandler(Incoming.RequestRoomDataEvent, Rooms.RequestRoomDataEvent);
+        this.addHandler(1371, Rooms.RequestRoomIgnoredListEvent);
+
         // Navigator
         this.addHandler(Incoming.RequestNavigatorDataEvent, Navigator.RequestNavigatorDataEvent);
         this.addHandler(Incoming.SearchNavigatorEvent, Navigator.SearchNavigatorEvent);
+        this.addHandler(Incoming.RequestNavigatorSettingsEvent,
+            Navigator.RequestNavigatorSettingsEvent);
+        this.addHandler(Incoming.GetRoomCategoriesEvent, Navigator.GetRoomCategoriesEvent);
+        this.addHandler(Incoming.RequestPromotedRoomsEvent, Navigator.RequestPromotedRoomsEvent);
     }
 }
 

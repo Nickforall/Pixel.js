@@ -17,6 +17,7 @@ function requestPlayerDataEvent(message, client) {
 
 function requestPlayerCurrencyEvent(message, client) {
     client.sendPacket(new Users.PlayerCreditsComposer(client.player));
+    client.sendPacket(new Users.PlayerCurrencyComposer(client.player));
 }
 
 function requestPlayerProfileEvent(message, client) {
@@ -47,9 +48,14 @@ function getClubDataEvent(message, client) {
     client.sendPacket(new Users.ClubDataComposer(message.readInt()));
 }
 
+function requestCitizenshipEvent(message, client) {
+    client.sendPacket(new Users.PlayerCitizenshipComposer(message.readString()));
+}
+
 module.exports.RequestPlayerDataEvent = requestPlayerDataEvent;
 module.exports.RequestPlayerCurrencyEvent = requestPlayerCurrencyEvent;
 module.exports.RequestPlayerProfileEvent = requestPlayerProfileEvent;
 module.exports.RequestPlayerClubDataEvent = requestPlayerClubDataEvent;
 module.exports.RequestPlayerWardrobeEvent = requestPlayerWardrobeEvent;
 module.exports.GetClubDataEvent = getClubDataEvent;
+module.exports.RequestCitizenshipEvent = requestCitizenshipEvent;

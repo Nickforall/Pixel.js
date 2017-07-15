@@ -2,6 +2,7 @@ const ServerMessage = require('../../networking/servermessage');
 const Handshake = require('../composers/handshake');
 const PlayerFactory = require('../../database/factories/player');
 const Outgoing = require('../outgoing');
+const Users = require('../composers/users');
 
 function releaseEventHandler(message) {
     console.log(`Client with release ${message.readString()} connected on the client type ${message.readString()}`);
@@ -18,6 +19,12 @@ function authTicketEvent(message, client) {
     PlayerFactory.fromSSOTicket(ticket).then((player) => {
         client.sendPacket(new ServerMessage(Outgoing.PlayerAuthOkComposer));
         client.setPlayer(player);
+
+        // these are packets that we need in order for the client to work, but
+        // probably shouldn't be here.
+        client.sendPacket(new Handshake.UnknownQuestComposer());
+        client.sendPacket(new Users.PlayerPermissionsComposer(client.player));
+        client.sendPacket(new Handshake.SessionRightsComposer());
     }).catch((err) => {
         console.error(err);
         client.disconnect();
