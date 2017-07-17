@@ -24,7 +24,13 @@ function authTicketEvent(message, client) {
         // probably shouldn't be here.
         client.sendPacket(new Handshake.UnknownQuestComposer());
         client.sendPacket(new Users.PlayerPermissionsComposer(client.player));
+        client.sendPacket(new Users.NewUserIdentityComposer());
         client.sendPacket(new Handshake.SessionRightsComposer());
+        client.sendPacket(new Users.PlayerAchievementsComposer());
+        client.sendPacket(new ServerMessage(Outgoing.UnknownComposer1));
+        client.sendPacket(new Handshake.UnknownComposer2());
+        client.sendPacket(new Handshake.DebuggerEnabledComposer());
+        client.sendPacket(new ServerMessage(Outgoing.InventoryRefreshComposer));
     }).catch((err) => {
         console.error(err);
         client.disconnect();

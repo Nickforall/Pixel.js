@@ -47,6 +47,7 @@ class PacketHandler {
         this.addHandler(Incoming.RequestPlayerWardrobeEvent, Users.RequestPlayerWardrobeEvent);
         this.addHandler(Incoming.GetClubDataEvent, Users.GetClubDataEvent);
         this.addHandler(Incoming.RequestCitizenshipEvent, Users.RequestCitizenshipEvent);
+        this.addHandler(Incoming.UpdateLookEvent, Users.UpdateLookEvent);
 
         // hotel view
         this.addHandler(Incoming.HotelViewDataEvent, HotelView.HotelViewDataEvent);
@@ -58,6 +59,8 @@ class PacketHandler {
         // rooms
         this.addHandler(Incoming.RequestRoomDataEvent, Rooms.RequestRoomDataEvent);
         this.addHandler(1371, Rooms.RequestRoomIgnoredListEvent);
+        this.addHandler(Incoming.RequestLoadRoomEvent, Rooms.RequestRoomLoadEvent);
+        this.addHandler(Incoming.RequestRoomMapsEvent, Rooms.RequestRoomMapsEvent);
 
         // Navigator
         this.addHandler(Incoming.RequestNavigatorDataEvent, Navigator.RequestNavigatorDataEvent);

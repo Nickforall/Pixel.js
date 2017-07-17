@@ -58,6 +58,24 @@ class PlayerController {
             });
         });
     }
+
+    static updateLook(id, newGender, newLook) {
+        const connection = Pixel.getDatabase().connection;
+
+        return new Promise((resolve, reject) => {
+            connection.query({
+                sql: 'UPDATE users SET `gender` = ?, `figure` = ? WHERE id = ?',
+                values: [newGender, newLook, id],
+            }, (error) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+
+                resolve();
+            });
+        });
+    }
 }
 
 module.exports = PlayerController;

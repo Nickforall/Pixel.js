@@ -32,9 +32,9 @@ class PlayerDataComposer extends PlayerComposer {
         message.writeInt(0); // respect available
         message.writeInt(0); // pet points
         message.writeBoolean(false);
-        message.writeBoolean(false);
         message.writeString('01-01-1970 00:00:00');
         message.writeBoolean(false);
+        message.writeBoolean(false); // is safety locked message
 
         return message;
     }
@@ -256,8 +256,8 @@ class PlayerCitizenshipComposer extends Composer {
         const message = new ServerMessage(Outgoing.PlayerCitizenshipComposer);
 
         message.writeString(this.name);
-        message.writeInt(4);
-        message.writeInt(4);
+        message.writeInt(0); // level
+        message.writeInt(0);
 
         return message;
     }
@@ -270,6 +270,38 @@ class PlayerPermissionsComposer extends PlayerComposer {
         message.writeInt(this.player.subscription.hasClub() ? 2 : 0);
         message.writeInt(1);
         message.writeBoolean(false); // is ambassador?
+
+        return message;
+    }
+}
+
+class PlayerUpdateLookComposer extends PlayerComposer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerUpdateLookComposer);
+
+        message.writeString(this.player.figure);
+        message.writeString(this.player.gender);
+
+        return message;
+    }
+}
+
+class NewUserIdentityComposer extends Composer {
+    compose() {
+        const message = new ServerMessage(Outgoing.NewUserIdentityComposer);
+
+        message.writeInt(0);
+
+        return message;
+    }
+}
+
+class PlayerAchievementsComposer extends Composer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerAchievementsComposer);
+
+        message.writeInt(0);
+        message.writeString('');
 
         return message;
     }
@@ -288,3 +320,6 @@ module.exports.PlayerWardrobeComposer = PlayerWardrobeComposer;
 module.exports.PlayerCurrencyComposer = PlayerCurrencyComposer;
 module.exports.PlayerCitizenshipComposer = PlayerCitizenshipComposer;
 module.exports.PlayerPermissionsComposer = PlayerPermissionsComposer;
+module.exports.PlayerUpdateLookComposer = PlayerUpdateLookComposer;
+module.exports.NewUserIdentityComposer = NewUserIdentityComposer;
+module.exports.PlayerAchievementsComposer = PlayerAchievementsComposer;

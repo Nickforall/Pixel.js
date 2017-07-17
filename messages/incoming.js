@@ -18,4 +18,7 @@ module.exports = {
     GetRoomCategoriesEvent: 3027,
     RequestPromotedRoomsEvent: 2908,
     RequestCitizenshipEvent: 2127,
+    UpdateLookEvent: 2730,
+    RequestLoadRoomEvent: 2312,
+    RequestRoomMapsEvent: 3898,
 };

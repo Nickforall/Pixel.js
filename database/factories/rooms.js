@@ -7,7 +7,7 @@ class RoomFactory {
 
         return new Promise((resolve, reject) => {
             connection.query({
-                sql: 'SELECT * FROM `rooms` INNER JOIN users ON rooms.owner_id = users.id WHERE rooms.id = ? LIMIT 1',
+                sql: 'SELECT rooms.id, name, description, owner_id, capacity, category, score, tags, public, state, room_owner.nickname AS owner_name FROM `rooms` JOIN `users` room_owner ON rooms.owner_id = room_owner.id WHERE rooms.id = ? LIMIT 1',
                 values: [id],
             }, (error, results) => {
                 if (error) {
@@ -16,12 +16,18 @@ class RoomFactory {
                 }
 
                 const result = results[0];
+
+                if (!result) {
+                    reject(new Error('Unknown Room id'));
+                    return;
+                }
+
                 resolve(new Room(
                     result.id,
                     result.name,
                     result.description,
                     result.owner_id,
-                    result.nickname,
+                    result.owner_name,
                     result.capacity,
                     result.category,
                     result.score,

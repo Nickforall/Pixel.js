@@ -40,6 +40,28 @@ class SessionRightsComposer extends Composer {
     }
 }
 
+class UnknownComposer2 extends Composer {
+    compose() {
+        const message = new ServerMessage(Outgoing.UnknownComposer2);
+
+        message.writeBoolean(true);
+
+        return message;
+    }
+}
+
+class DebuggerEnabledComposer extends Composer {
+    compose() {
+        const message = new ServerMessage(Outgoing.DebuggerEnabledComposer);
+
+        message.writeBoolean(true);
+
+        return message;
+    }
+}
+
 module.exports.MachineIdComposer = MachineIdComposer;
 module.exports.UnknownQuestComposer = UnknownQuestComposer;
 module.exports.SessionRightsComposer = SessionRightsComposer;
+module.exports.UnknownComposer2 = UnknownComposer2;
+module.exports.DebuggerEnabledComposer = DebuggerEnabledComposer;
