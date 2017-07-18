@@ -1,12 +1,24 @@
 const ServerMessage = require('../networking/servermessage');
 const Composer = require('../messages/composers/composer');
 const chalk = require('chalk');
+const DiffieHellman = require('../crypto/dh');
+const RC4 = require('../crypto/rc4');
 
 class GameClient {
     constructor(socket) {
         this._socket = socket;
         this._machineId = null;
         this._player = null;
+        this.initializedCrypto = false;
+
+        this.diffieHellman = new DiffieHellman();
+        this.diffieHellman.generateDH();
+    }
+
+    initRc4() {
+        this.rc4client = new RC4(this.diffieHellman.getSharedKey().toByteArray(true));
+        this.rc4server = new RC4(this.diffieHellman.getSharedKey().toByteArray(true));
+        this.initializedCrypto = true;
     }
 
     set machineId(id) {
@@ -45,7 +57,13 @@ class GameClient {
             throw new Error("Provided packet isn't a valid packet.");
         }
 
-        this._socket.write(packet.buffer);
+        let buffer = packet.buffer;
+
+        if (this.initializedCrypto) {
+            buffer = this.rc4server.parse(buffer);
+        }
+
+        this._socket.write(buffer);
         console.log(chalk.blue(`SERVER => ${packet.header} -> ${packet.debugBody()}`));
     }
 

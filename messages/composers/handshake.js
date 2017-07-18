@@ -2,6 +2,37 @@ const Composer = require('./composer');
 const Outgoing = require('../outgoing');
 const ServerMessage = require('../../networking/servermessage');
 
+class CryptoComposer extends Composer {
+    constructor(prime, generator) {
+        super();
+        this.p = prime;
+        this.g = generator;
+    }
+
+    compose() {
+        const message = new ServerMessage(Outgoing.CryptoComposer);
+        message.writeString(this.p);
+        message.writeString(this.g);
+
+        return message;
+    }
+}
+
+class SecretKeyComposer extends Composer {
+    constructor(key) {
+        super();
+        this.key = key;
+    }
+
+    compose() {
+        const message = new ServerMessage(Outgoing.SecretKeyComposer);
+        message.writeString(this.key);
+        message.writeBoolean(true);
+
+        return message;
+    }
+}
+
 class MachineIdComposer extends Composer {
     constructor(machineid) {
         super();
@@ -60,6 +91,8 @@ class DebuggerEnabledComposer extends Composer {
     }
 }
 
+module.exports.CryptoComposer = CryptoComposer;
+module.exports.SecretKeyComposer = SecretKeyComposer;
 module.exports.MachineIdComposer = MachineIdComposer;
 module.exports.UnknownQuestComposer = UnknownQuestComposer;
 module.exports.SessionRightsComposer = SessionRightsComposer;

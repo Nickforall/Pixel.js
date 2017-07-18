@@ -4,6 +4,27 @@ const PlayerFactory = require('../../database/factories/player');
 const Outgoing = require('../outgoing');
 const Users = require('../composers/users');
 
+function initializeCryptoEvent(message, client) {
+    client.sendPacket(new Handshake.CryptoComposer(
+        Pixel.getGameServer().rsa.sign(client.diffieHellman.getPrime().toString()),
+        Pixel.getGameServer().rsa.sign(client.diffieHellman.getGenerator().toString())
+    ));
+}
+
+function generateSecretKeyEvent(message, client) {
+    const key = message.readString();
+
+    if (key.length !== 256) {
+        return;
+    }
+
+    client.sendPacket(new Handshake.SecretKeyComposer(
+        Pixel.getGameServer().rsa.sign(client.diffieHellman.getPublicKey().toString())
+    ));
+    client.diffieHellman.generateSharedKey(Pixel.getGameServer().rsa.decrypt(key));
+    client.initRc4();
+}
+
 function releaseEventHandler(message) {
     console.log(`Client with release ${message.readString()} connected on the client type ${message.readString()}`);
 }
@@ -37,6 +58,8 @@ function authTicketEvent(message, client) {
     });
 }
 
+module.exports.InitializeCryptoEvent = initializeCryptoEvent;
+module.exports.GenerateSecretKeyEvent = generateSecretKeyEvent;
 module.exports.ReleaseEventHandler = releaseEventHandler;
 module.exports.MachineIdEvent = machineIdEvent;
 module.exports.AuthTicketEvent = authTicketEvent;

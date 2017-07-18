@@ -35,6 +35,8 @@ class PacketHandler {
 
     registerHandlers() {
         // handshake
+        this.addHandler(Incoming.InitializeCryptoEvent, Handshake.InitializeCryptoEvent);
+        this.addHandler(Incoming.GenerateSecretKeyEvent, Handshake.GenerateSecretKeyEvent);
         this.addHandler(Incoming.ReleaseEventHandler, Handshake.ReleaseEventHandler);
         this.addHandler(Incoming.MachineIdEvent, Handshake.MachineIdEvent);
         this.addHandler(Incoming.AuthTicketEvent, Handshake.AuthTicketEvent);

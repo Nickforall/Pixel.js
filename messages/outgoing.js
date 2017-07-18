@@ -1,24 +1,24 @@
 module.exports = {
-    MachineIdComposer: 1488,
-    PlayerAuthOkComposer: 2491,
-    PlayerDataComposer: 2725,
-    PlayerPerksComposer: 2586,
+    MachineIdComposer: 841, // updated
+    PlayerAuthOkComposer: 982, // updated
+    PlayerDataComposer: 1639, // updated
+    PlayerPerksComposer: 2141, // updated
     PlayerHomeComposer: 2875,
-    PlayerCreditsComposer: 3475,
+    PlayerCreditsComposer: 1239, // updated
     HotelViewDataComposer: 1745,
     HotelViewBonusRareComposer: 1533,
     PlayerProfileComposer: 3898,
     GenericAlertComposer: 3801,
     PlayerClubComposer: 954,
-    ClubDataComposer: 2405,
+    ClubDataComposer: 799,
     PlayerWardrobeComposer: 3315,
-    InitializeMessengerComposer: 1605,
-    PlayerFriendsComposer: 3130,
+    InitializeMessengerComposer: 961,
+    PlayerFriendsComposer: 1152,
     UpdateFriendComposer: 2800,
-    NavigatorMetaDataComposer: 3052,
-    NavigatorSearchResultComposer: 2690,
+    NavigatorMetaDataComposer: 286,
+    NavigatorSearchResultComposer: 288,
     RoomDataComposer: 687,
-    NavigatorSettingsComposer: 518,
+    NavigatorSettingsComposer: 659,
     RoomCategoriesComposer: 1562,
     PlayerCurrencyComposer: 2018,
     UnknownRoomListComposer: 52,
@@ -53,4 +53,6 @@ module.exports = {
     UnknownComposer1: 3928,
     UnknownComposer2: 793,
     DebuggerEnabledComposer: 3284,
+    CryptoComposer: 3717,
+    SecretKeyComposer: 1610,
 };
