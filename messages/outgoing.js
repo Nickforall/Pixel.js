@@ -29,7 +29,7 @@ module.exports = {
     NavigatorEventCategoryComposer: 3568,
     UnknownQuestComposer: 2371,
     SessionRightsComposer: 3445,
-    PlayerPermissionsComposer: 3262,
+    PlayerPermissionsComposer: 3263,
     PlayerUpdateLookComposer: 2804,
     RoomOpenComposer: 1714,
     RoomHeightmapComposer: 1202,
