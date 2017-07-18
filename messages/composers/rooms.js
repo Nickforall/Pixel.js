@@ -83,23 +83,6 @@ class UnknownIgnoredNameArrayComposer extends Composer {
     }
 }
 
-class RoomModelComposer extends Composer {
-    constructor(roomId) {
-        super();
-
-        this.roomId = roomId;
-    }
-
-    compose() {
-        const message = new ServerMessage(Outgoing.RoomModelComposer);
-
-        message.writeString('model_a');
-        message.writeInt(this.roomId);
-
-        return message;
-    }
-}
-
 class RoomHeightmapComposer extends Composer {
     compose() {
         const message = new ServerMessage(Outgoing.RoomHeightmapComposer);
@@ -349,7 +332,6 @@ class RoomEventMessageComposer extends Composer {
 
 module.exports.RoomDataComposer = RoomDataComposer;
 module.exports.UnknownIgnoredNameArrayComposer = UnknownIgnoredNameArrayComposer;
-module.exports.RoomModelComposer = RoomModelComposer;
 module.exports.RoomHeightmapComposer = RoomHeightmapComposer;
 module.exports.RoomPlayersComposer = RoomPlayersComposer;
 module.exports.RoomRelativeMapComposer = RoomRelativeMapComposer;

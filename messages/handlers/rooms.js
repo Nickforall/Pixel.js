@@ -30,7 +30,6 @@ function requestRoomLoadEvent(message, client) {
     const id = message.readInt();
 
     RoomFactory.getRoomById(id).then((room) => {
-        client.sendPacket(new Rooms.RoomModelComposer(id));
         client.sendPacket(new Rooms.RoomPlayersComposer(client.player));
         client.sendPacket(new Rooms.RoomPlayersPositionComposer(client.player));
         client.sendPacket(new Rooms.RoomPlayersComposer(client.player));

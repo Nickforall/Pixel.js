@@ -40,6 +40,7 @@ class PacketHandler {
         this.addHandler(Incoming.ReleaseEventHandler, Handshake.ReleaseEventHandler);
         this.addHandler(Incoming.MachineIdEvent, Handshake.MachineIdEvent);
         this.addHandler(Incoming.AuthTicketEvent, Handshake.AuthTicketEvent);
+        this.addHandler(Incoming.PingEvent, Handshake.PingEvent);
 
         // users
         this.addHandler(Incoming.RequestPlayerDataEvent, Users.RequestPlayerDataEvent);
@@ -60,7 +61,6 @@ class PacketHandler {
 
         // rooms
         this.addHandler(Incoming.RequestRoomDataEvent, Rooms.RequestRoomDataEvent);
-        this.addHandler(1371, Rooms.RequestRoomIgnoredListEvent);
         this.addHandler(Incoming.RequestLoadRoomEvent, Rooms.RequestRoomLoadEvent);
         this.addHandler(Incoming.RequestRoomMapsEvent, Rooms.RequestRoomMapsEvent);
 

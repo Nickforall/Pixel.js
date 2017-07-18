@@ -91,6 +91,21 @@ class DebuggerEnabledComposer extends Composer {
     }
 }
 
+class PongComposer extends Composer {
+    constructor(index) {
+        super();
+        this.i = index;
+    }
+
+    compose() {
+        const message = new ServerMessage(Outgoing.PongComposer);
+
+        message.writeInt(this.i);
+
+        return message;
+    }
+}
+
 module.exports.CryptoComposer = CryptoComposer;
 module.exports.SecretKeyComposer = SecretKeyComposer;
 module.exports.MachineIdComposer = MachineIdComposer;
@@ -98,3 +113,4 @@ module.exports.UnknownQuestComposer = UnknownQuestComposer;
 module.exports.SessionRightsComposer = SessionRightsComposer;
 module.exports.UnknownComposer2 = UnknownComposer2;
 module.exports.DebuggerEnabledComposer = DebuggerEnabledComposer;
+module.exports.PongComposer = PongComposer;

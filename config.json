@@ -1,6 +1,6 @@
 {
     "logPackets": true,
-    "ignoredIncomingPackets": [4000, 3790, 295],
+    "ignoredIncomingPackets": [4000, 2505, 2721],
     "mysql": {
         "host": "",
         "port": 3306,

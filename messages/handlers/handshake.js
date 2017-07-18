@@ -58,8 +58,13 @@ function authTicketEvent(message, client) {
     });
 }
 
+function pingEvent(message, client) {
+    client.sendPacket(new Handshake.PongComposer(message.readInt()));
+}
+
 module.exports.InitializeCryptoEvent = initializeCryptoEvent;
 module.exports.GenerateSecretKeyEvent = generateSecretKeyEvent;
 module.exports.ReleaseEventHandler = releaseEventHandler;
 module.exports.MachineIdEvent = machineIdEvent;
 module.exports.AuthTicketEvent = authTicketEvent;
+module.exports.PingEvent = pingEvent;
