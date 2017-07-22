@@ -111,7 +111,7 @@ class ClientMessage {
         let outputText = '';
 
         for (let i = 0; i < bufferText.length; i++) {
-            if (bufferText.charCodeAt(i) < 0x1f) {
+            if (bufferText.charCodeAt(i) < 0x20 || bufferText.charCodeAt(i) > 126) {
                 outputText += `[${bufferText.charCodeAt(i)}]`;
             } else {
                 outputText += bufferText[i];

@@ -27,7 +27,6 @@ class Player {
 
     setOnline() {
         this.isOnline = true;
-        console.log(this instanceof Player);
         this.sendPacketToFriends(new Messenger.UpdateFriendComposer(this));
     }
 

@@ -4,10 +4,13 @@ const config = require('../config.json');
 const GameClient = require('../game/gameclient');
 const chalk = require('chalk');
 const bufferHelpers = require('./bufferhelpers');
+const RSA = require('../lib/rsa').RSA;
 
 class GameServer {
     constructor() {
         this.tcp = net.createServer(this._socketConnectionHandler.bind(this));
+        this.rsa = new RSA();
+        this.rsa.setPrivate(config.crypto.N, config.crypto.E, config.crypto.D);
     }
 
     _socketConnectionHandler(socket) {
@@ -42,6 +45,10 @@ class GameServer {
                 '</cross-domain-policy>\0');
             socket.destroy();
             return;
+        }
+
+        if (socket.gameclient.initializedCrypto) {
+            buffer = socket.gameclient.rc4client.parse(buffer);
         }
 
         // while the buffer has a length integer at the start

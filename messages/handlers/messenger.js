@@ -11,4 +11,9 @@ function initializeMessengerEvent(message, client) {
     });
 }
 
+function requestFriendRequestEvent(message, client) {
+    client.sendPacket(new Messenger.PlayerFriendRequestsComposer());
+}
+
 module.exports.InitializeMessengerEvent = initializeMessengerEvent;
+module.exports.RequestFriendRequestEvent = requestFriendRequestEvent;

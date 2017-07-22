@@ -1,14 +1,16 @@
 class Room {
-    constructor(id, name, description, owner, capacity, category, score, tags, isPublic, state) {
+    constructor(id, name, description, ownerId, ownerName, capacity, category,
+        score, tags, isPublic, state) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.owner = owner;
+        this.ownerId = ownerId;
+        this.ownerName = ownerName;
         this.capacity = capacity;
         this.category = category;
         this.score = score;
         this.tags = tags;
-        this.isPublic = isPublic;
+        this.isPublic = false;
         this.state = state;
     }
 
@@ -20,8 +22,8 @@ class Room {
             message.writeInt(0);
             message.writeString('');
         } else {
-            message.writeInt(this.owner.id);
-            message.writeString(this.owner.name);
+            message.writeInt(this.ownerId);
+            message.writeString(this.ownerName);
         }
 
         message.writeInt(this.state);

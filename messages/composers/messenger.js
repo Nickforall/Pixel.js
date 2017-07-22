@@ -87,6 +87,18 @@ class UpdateFriendComposer extends Composer {
     }
 }
 
+class PlayerFriendRequestsComposer extends Composer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerFriendRequestsComposer);
+
+        message.writeInt(0);
+        message.writeInt(0);
+
+        return message;
+    }
+}
+
+module.exports.PlayerFriendRequestsComposer = PlayerFriendRequestsComposer;
 module.exports.InitializeMessengerComposer = InitializeMessengerComposer;
 module.exports.PlayerFriendsComposer = PlayerFriendsComposer;
 module.exports.UpdateFriendComposer = UpdateFriendComposer;

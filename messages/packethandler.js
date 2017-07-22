@@ -1,9 +1,11 @@
-const Incoming = require('./incoming');
+// const Incoming = require('./incoming');
 const Handshake = require('./handlers/handshake');
 const HotelView = require('./handlers/hotelview');
 const Users = require('./handlers/users');
 const Messenger = require('./handlers/messenger');
 const Navigator = require('./handlers/navigator');
+const Rooms = require('./handlers/rooms');
+const Incoming = require('./incoming');
 
 class PacketHandler {
     constructor() {
@@ -33,9 +35,12 @@ class PacketHandler {
 
     registerHandlers() {
         // handshake
+        this.addHandler(Incoming.InitializeCryptoEvent, Handshake.InitializeCryptoEvent);
+        this.addHandler(Incoming.GenerateSecretKeyEvent, Handshake.GenerateSecretKeyEvent);
         this.addHandler(Incoming.ReleaseEventHandler, Handshake.ReleaseEventHandler);
         this.addHandler(Incoming.MachineIdEvent, Handshake.MachineIdEvent);
         this.addHandler(Incoming.AuthTicketEvent, Handshake.AuthTicketEvent);
+        this.addHandler(Incoming.PingEvent, Handshake.PingEvent);
 
         // users
         this.addHandler(Incoming.RequestPlayerDataEvent, Users.RequestPlayerDataEvent);
@@ -44,6 +49,10 @@ class PacketHandler {
         this.addHandler(Incoming.RequestPlayerClubDataEvent, Users.RequestPlayerClubDataEvent);
         this.addHandler(Incoming.RequestPlayerWardrobeEvent, Users.RequestPlayerWardrobeEvent);
         this.addHandler(Incoming.GetClubDataEvent, Users.GetClubDataEvent);
+        this.addHandler(Incoming.RequestCitizenshipEvent, Users.RequestCitizenshipEvent);
+        this.addHandler(Incoming.UpdateLookEvent, Users.UpdateLookEvent);
+        this.addHandler(Incoming.RequestPlayerMenuSettingsEvent,
+           Users.RequestPlayerMenuSettingsEvent);
 
         // hotel view
         this.addHandler(Incoming.HotelViewDataEvent, HotelView.HotelViewDataEvent);
@@ -51,10 +60,21 @@ class PacketHandler {
 
         // messenger
         this.addHandler(Incoming.InitializeMessengerEvent, Messenger.InitializeMessengerEvent);
+        this.addHandler(Incoming.RequestFriendRequestEvent, Messenger.RequestFriendRequestEvent);
+
+        // rooms
+        this.addHandler(Incoming.RequestRoomDataEvent, Rooms.RequestRoomDataEvent);
+        this.addHandler(Incoming.RequestLoadRoomEvent, Rooms.RequestRoomLoadEvent);
+        this.addHandler(Incoming.RequestRoomMapsEvent, Rooms.RequestRoomMapsEvent);
+        this.addHandler(Incoming.RoomChatEvent, Rooms.RoomChatEvent);
 
         // Navigator
         this.addHandler(Incoming.RequestNavigatorDataEvent, Navigator.RequestNavigatorDataEvent);
         this.addHandler(Incoming.SearchNavigatorEvent, Navigator.SearchNavigatorEvent);
+        this.addHandler(Incoming.RequestNavigatorSettingsEvent,
+           Navigator.RequestNavigatorSettingsEvent);
+        this.addHandler(Incoming.GetRoomCategoriesEvent, Navigator.GetRoomCategoriesEvent);
+        this.addHandler(Incoming.RequestPromotedRoomsEvent, Navigator.RequestPromotedRoomsEvent);
     }
 }
 
