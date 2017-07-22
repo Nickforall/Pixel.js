@@ -32,7 +32,7 @@ class RoomFactory {
                     result.category,
                     result.score,
                     result.tags,
-                    result.public === 1,
+                    result.public > 0,
                     result.state
                 ));
             });

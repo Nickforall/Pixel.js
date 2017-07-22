@@ -1,4 +1,5 @@
 const Users = require('../composers/users');
+const Rooms = require('../composers/rooms');
 const PlayerFactory = require('../../database/factories/player');
 const config = require('../../config.json');
 const PlayerController = require('../../database/controllers/player');
@@ -7,9 +8,18 @@ const chalk = require('chalk');
 function requestPlayerDataEvent(message, client) {
     const player = client.player;
 
-    client.sendPacket(new Users.PlayerDataComposer(player));
-    client.sendPacket(new Users.PlayerPerksComposer(player));
-    client.sendPacket(new Users.PlayerHomeComposer(player));
+    const messages = [
+        new Users.PlayerDataComposer(player),
+        new Users.PlayerPerksComposer(player),
+        new Users.PlayerHomeComposer(player),
+        new Users.PlayerAchievementScoreComposer(1337)
+    ];
+
+    if (player.home > 0) {
+        messages.push(new Rooms.RoomForwardComposer(player.home));
+    }
+
+    client.sendPackets(messages);
 
     if (config.welcomeAlert.enabled) {
         player.sendAlert(config.welcomeAlert.message);
@@ -74,6 +84,10 @@ function updateLookEvent(message, client) {
     });
 }
 
+function requestPlayerMenuSettingsEvent(message, client) {
+    client.sendPacket(new Users.PlayerMenuSettingsComposer());
+}
+
 module.exports.RequestPlayerDataEvent = requestPlayerDataEvent;
 module.exports.RequestPlayerCurrencyEvent = requestPlayerCurrencyEvent;
 module.exports.RequestPlayerProfileEvent = requestPlayerProfileEvent;
@@ -82,3 +96,4 @@ module.exports.RequestPlayerWardrobeEvent = requestPlayerWardrobeEvent;
 module.exports.GetClubDataEvent = getClubDataEvent;
 module.exports.RequestCitizenshipEvent = requestCitizenshipEvent;
 module.exports.UpdateLookEvent = updateLookEvent;
+module.exports.RequestPlayerMenuSettingsEvent = requestPlayerMenuSettingsEvent;

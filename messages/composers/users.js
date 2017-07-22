@@ -29,8 +29,8 @@ class PlayerDataComposer extends PlayerComposer {
         message.writeString(this.player.name);
         message.writeBoolean(false); // ?
         message.writeInt(0); // respect received
-        message.writeInt(0); // respect available
-        message.writeInt(0); // pet points
+        message.writeInt(3); // respect available
+        message.writeInt(3); // pet points
         message.writeBoolean(false);
         message.writeString('01-01-1970 00:00:00');
         message.writeBoolean(false);
@@ -66,23 +66,23 @@ class PlayerPerksComposer extends PlayerComposer {
         message.writeString('');
         message.writeBoolean(true);
 
+        message.writeString('CITIZEN');
+        message.writeString('');
+        message.writeBoolean(true);
+
+        message.writeString('TRADE');
+        message.writeString('requirement.unfulfilled.no_trade_lock');
+        message.writeBoolean(false);
+
+        message.writeString('HEIGHTMAP_EDITOR_BETA');
+        message.writeString('requirement.unfulfilled.feature_disabled');
+        message.writeBoolean(true);
+
         message.writeString('BUILDER_AT_WORK');
         message.writeString('');
         message.writeBoolean(true);
 
-        message.writeString('CITIZEN');
-        message.writeString('');
-        message.writeBoolean(false);
-
-        message.writeString('TRADE');
-        message.writeString('requirement.unfulfilled.no_trade_lock');
-        message.writeBoolean(true);
-
-        message.writeString('HEIGHTMAP_EDITOR_BETA');
-        message.writeString('');
-        message.writeBoolean(true);
-
-        message.writeString('NAVIGATOR_PHASE_ONE_2014');
+        message.writeString('CALL_ON_HELPERS');
         message.writeString('');
         message.writeBoolean(true);
 
@@ -307,8 +307,74 @@ class PlayerAchievementsComposer extends Composer {
     }
 }
 
+class PlayerMenuSettingsComposer extends Composer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerMenuSettingsComposer);
+
+        message.writeInt(100);
+        message.writeInt(100);
+        message.writeInt(100);
+        message.writeBoolean(false);
+        message.writeBoolean(false);
+        message.writeBoolean(false);
+        message.writeInt(1);
+        message.writeInt(0);
+
+        return message;
+    }
+}
+
+class PlayerEffectListComposer extends Composer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerEffectListComposer);
+
+        message.writeInt(0);
+
+        return message;
+    }
+}
+
+class PlayerClothesComposer extends Composer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerClothesComposer);
+
+        message.writeInt(0);
+        message.writeInt(0);
+
+        return message;
+    }
+}
+
+class PlayerFavoritesComposer extends Composer {
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerFavoritesComposer);
+
+        message.writeInt(1000); // max rooms
+        message.writeInt(0); // size
+
+        return message;
+    }
+}
+
+class PlayerAchievementScoreComposer extends Composer {
+    constructor(score) {
+        super();
+        this.score = score;
+    }
+
+    compose() {
+        const message = new ServerMessage(Outgoing.PlayerAchievementScoreComposer);
+
+        message.writeInt(this.score);
+
+        return message;
+    }
+}
+
 module.exports.PlayerComposer = PlayerComposer;
 
+module.exports.PlayerAchievementScoreComposer = PlayerAchievementScoreComposer;
+module.exports.PlayerFavoritesComposer = PlayerFavoritesComposer;
 module.exports.PlayerDataComposer = PlayerDataComposer;
 module.exports.PlayerPerksComposer = PlayerPerksComposer;
 module.exports.PlayerHomeComposer = PlayerHomeComposer;
@@ -323,3 +389,6 @@ module.exports.PlayerPermissionsComposer = PlayerPermissionsComposer;
 module.exports.PlayerUpdateLookComposer = PlayerUpdateLookComposer;
 module.exports.NewUserIdentityComposer = NewUserIdentityComposer;
 module.exports.PlayerAchievementsComposer = PlayerAchievementsComposer;
+module.exports.PlayerMenuSettingsComposer = PlayerMenuSettingsComposer;
+module.exports.PlayerEffectListComposer = PlayerEffectListComposer;
+module.exports.PlayerClothesComposer = PlayerClothesComposer;

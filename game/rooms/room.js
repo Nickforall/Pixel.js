@@ -10,7 +10,7 @@ class Room {
         this.category = category;
         this.score = score;
         this.tags = tags;
-        this.isPublic = isPublic;
+        this.isPublic = false;
         this.state = state;
     }
 
